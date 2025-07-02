@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💖 Happy Birthday Yani 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #ffe6f0, #ffc2d1, #ffb3c6);
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1, h2, p {
+      color: #b30059;
+      text-shadow: 1px 1px 3px white;
+    }
+
+    .glow-btn {
+      background: linear-gradient(to right, #ff4b91, #ff86c8);
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #ff4b91aa;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      margin: 15px auto;
+      display: block;
+    }
+
+    .glow-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .love-box {
+      background: #fff5fa;
+      border: 2px dashed #ff69b4;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px;
+      box-shadow: 0 8px 16px rgba(255, 0, 128, 0.2);
+      font-size: 1.1rem;
+      color: #880046;
+      display: none;
+    }
+
+    .lock-screen {
+      background: radial-gradient(circle at center, #ffdee9, #ffd3e5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .lock-screen input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ff4b91;
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .stars, .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .star, .heart {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: pink;
+      border-radius: 50%;
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart {
+      width: 14px;
+      height: 14px;
+      background: #ff4b91;
+      border-radius: 50% 50% 0 0;
+      transform: rotate(45deg);
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-10vh); }
+    }
+
+    #countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #d10072;
+      text-shadow: 2px 2px 4px white;
+    }
+  </style>
+</head>
+<body>
+<!-- Floating hearts and stars animation container -->
+<div class="stars" id="starField"></div>
+<div class="hearts" id="heartField"></div>
+
+<!-- Lock screen -->
+<div class="lock-screen" id="lockScreen">
+  <h1 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem;">🔐 Enter Password, Baby</h1>
+  <input type="password" id="passwordInput" placeholder="Enter password...">
+  <button class="glow-btn" onclick="checkPassword()">Unlock</button>
+</div>
+
+<!-- Welcome Section -->
+<div id="mainContent" style="display:none; padding: 30px; text-align: center;">
+  <img src="https://media.tenor.com/VOMC_Au83TsAAAAi/hello-kitty-love-you.gif" width="100">
+  <h1 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem;">Welcome, Yani 💕</h1>
+  <p style="font-size: 1.2rem;">Sahil made this magical world just for you 🥺</p>
+
+  <div id="countdown">⏳ Loading countdown...</div>
+
+  <button class="glow-btn" onclick="toggleBox('box1')">💌 Notes for You</button>
+  <div id="box1" class="love-box">Loading...</div>
+
+  <button class="glow-btn" onclick="toggleBox('box2')">❤️ How Much I Love You</button>
+  <div id="box2" class="love-box">Loading...</div>
+
+  <button class="glow-btn" onclick="toggleBox('box3')">💖 Words I Can't Say</button>
+  <div id="box3" class="love-box">Loading...</div>
+
+  <button class="glow-btn" onclick="toggleBox('box4')">🎀 Our Sweet Memories</button>
+  <div id="box4" class="love-box">Loading...</div>
+</div>
+
+<!-- Background Music -->
+<audio id="bg-music" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/31/audio_9b9cba2a5e.mp3" type="audio/mpeg">
+</audio>
+<script>
+  // Floating Stars & Hearts ✨
+  function createFloatingShapes(id, shape, count) {
+    const container = document.getElementById(id);
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement("div");
+      el.classList.add(shape);
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.top = Math.random() * 100 + "vh";
+      el.style.animationDuration = 5 + Math.random() * 10 + "s";
+      el.style.opacity = Math.random();
+      container.appendChild(el);
+    }
+  }
+  createFloatingShapes("starField", "star", 50);
+  createFloatingShapes("heartField", "heart", 30);
+
+  // Password unlock
+  function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    if (input === "SAHILLOVESYOU") {
+      document.getElementById("lockScreen").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+      document.getElementById("bg-music").play();
+      loadBoxes();
+      countdown();
+    } else {
+      alert("Wrong password, cutie 💔");
+    }
+  }
+
+  // Countdown Timer ⏳
+  function countdown() {
+    const countTo = new Date("2025-08-01T00:00:00").getTime();
+    const counter = document.getElementById("countdown");
+
+    const x = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countTo - now;
+
+      if (distance < 0) {
+        clearInterval(x);
+        counter.innerHTML = "🎉 It's your birthday, Yani!!";
+        launchSurprise();
+      } else {
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        counter.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+      }
+    }, 1000);
+  }
+
+  // Toggle boxes
+  function toggleBox(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+
+  // Love notes content
+  function loadBoxes() {
+    const boxes = [
+      `My sweet Yani, your presence makes my world glow. I never thought someone could make me smile this much. You're the reason my heart beats. I love you more than words could ever say.`,
+      `You are my safe space, my adventure, and my best dream. I’m addicted to your voice, your soul, and every little thing that makes you — you. I want to grow old with you, babygirl.`,
+      `Sometimes I just stare at our chats or memories, and think, “Damn, I got the best one.” You’re not just my girlfriend — you’re the whole meaning of love in my life.`,
+      `Every moment with you is golden. The late-night texts, the giggles, your sleepy voice — everything is a treasure. You're my person, my peace, and my forever.`
+    ];
+
+    const startDate = new Date("2025-07-28");
+    const today = new Date();
+    const day = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+
+    for (let i = 0; i < 4; i++) {
+      const box = document.getElementById(`box${i + 1}`);
+      if (i <= day) {
+        box.innerHTML = boxes[i];
+        document.querySelectorAll(".glow-btn")[i].style.opacity = 1;
+      } else {
+        box.innerHTML = "🔒 This note unlocks tomorrow, my love.";
+        document.querySelectorAll(".glow-btn")[i].style.opacity = 0.5;
+        document.querySelectorAll(".glow-btn")[i].style.pointerEvents = "none";
+      }
+    }
+  }
+
+  // Birthday Blast Surprise 🎊
+  function launchSurprise() {
+    const blast = document.createElement("div");
+    blast.style.cssText = `
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:#fff0f6;z-index:9999;display:flex;
+      flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;padding:20px;font-family:'Great Vibes',cursive;
+    `;
+    blast.innerHTML = `
+      <img src="https://media.tenor.com/py-L9Jf8u5UAAAAi/hello-kitty-love.gif" width="160" />
+      <h1 style="color:#ff4b91;font-size:3rem;">Happy Birthday Yani 🎂💖</h1>
+      <p style="color:#b30059;font-size:1.5rem;max-width:700px;">
+        You're the light in my life, my softest thought and wildest obsession.  
+        Thank you for being born, for being mine, for existing.  
+        I love you endlessly. This is your world, baby — and I’ll keep filling it with love.  
+        <br>— Sahil 💋
+      </p>
+    `;
+    document.body.appendChild(blast);
+    rainHearts(blast);
+  }
+
+  // Confetti / Heart Rain on Surprise
+  function rainHearts(container) {
+    for (let i = 0; i < 100; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "-10vh";
+      heart.style.width = "16px";
+      heart.style.height = "16px";
+      heart.style.animation = `float ${3 + Math.random() * 3}s ease-in ${Math.random() * 5}s infinite`;
+      container.appendChild(heart);
+    }
+  }
+</script>
+
+</body>
+</html>
